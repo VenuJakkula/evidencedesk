@@ -1,0 +1,17 @@
+[
+  {
+    "question": "How is customer data encrypted at rest?",
+    "status": "needs_review",
+    "expected": "AES-256"
+  },
+  {
+    "question": "Do you offer biometric authentication?",
+    "status": "needs_evidence",
+    "expected": "Insufficient"
+  },
+  {
+    "question": "What transport encryption is used?",
+    "status": "needs_review",
+    "expected": "TLS"
+  }
+]

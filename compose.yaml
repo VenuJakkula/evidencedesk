@@ -1,0 +1,10 @@
+services:
+  api:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      EVIDENCEDESK_API_KEY: ${EVIDENCEDESK_API_KEY:?Set EVIDENCEDESK_API_KEY}
+      EVIDENCEDESK_TENANT: demo
+    volumes: ["evidence-data:/data"]
+volumes:
+  evidence-data:
