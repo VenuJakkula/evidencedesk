@@ -37,6 +37,8 @@ def main():
             assert http.post('/documents',headers={'X-API-Key':key},json=body).status_code==201
             assert command('exec',name,'id','-u')=='10001'
         command('restart',name)
+        # Docker may allocate a different ephemeral host port after restart.
+        endpoint='http://'+command('port',name,'8000/tcp').splitlines()[0]
         with httpx.Client(base_url=endpoint,timeout=5) as http:
             for _ in range(60):
                 try:
