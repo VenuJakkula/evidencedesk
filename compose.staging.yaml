@@ -1,0 +1,27 @@
+# Standalone staging recipe; requires an explicitly prepared DB and trusted JWKS.
+# No ports are publicly exposed. Put the operator's TLS proxy on loopback 8001.
+services:
+  api:
+    image: ${EVIDENCEDESK_IMAGE:?Set an immutable tested image reference}
+    ports: ["127.0.0.1:8001:8000"]
+    environment:
+      EVIDENCEDESK_DEPLOYMENT: staging
+      EVIDENCEDESK_AUTH_MODE: oidc
+      EVIDENCEDESK_OIDC_ISSUER: ${EVIDENCEDESK_OIDC_ISSUER:?Set trusted issuer}
+      EVIDENCEDESK_OIDC_AUDIENCE: ${EVIDENCEDESK_OIDC_AUDIENCE:?Set API audience}
+      EVIDENCEDESK_OIDC_JWKS_FILE: /run/secrets/jwks.json
+      EVIDENCEDESK_TRACE_FILE: /data/operations.jsonl
+      EVIDENCEDESK_ALLOW_LIVE_WORKFLOWS: "0"
+      EVIDENCEDESK_ALLOW_LOCAL_FRONTEND: "0"
+      EVIDENCEDESK_ALLOW_LOCAL_KEY_RECOVERY: "0"
+    volumes:
+      - ${EVIDENCEDESK_STAGING_DATA:?Set prepared staging data directory}:/data
+      - ${EVIDENCEDESK_STAGING_JWKS:?Set trusted public JWKS path}:/run/secrets/jwks.json:ro
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=64m"]
+    mem_limit: 512m
+    cpus: 1
+    pids_limit: 128
+    restart: unless-stopped

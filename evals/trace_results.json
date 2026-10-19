@@ -1,0 +1,25 @@
+{
+  "spans": 672,
+  "names": [
+    "http",
+    "ingestion",
+    "model",
+    "provider",
+    "retrieval",
+    "tool",
+    "workflow"
+  ],
+  "linked_children": 90,
+  "job_spans": 136,
+  "failure_categories": [
+    "access",
+    "conflict",
+    "deadline",
+    "internal",
+    "none",
+    "provider",
+    "validation"
+  ],
+  "raw_content_retained": false,
+  "limitations": "Local test traces only; remote LangSmith account/export was not exercised."
+}

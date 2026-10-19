@@ -10,3 +10,14 @@ __pycache__/
 
 # Local questionnaire exports
 output/
+
+# React dependencies, builds and local configuration
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.*.local
+frontend/coverage/
+frontend/*.tsbuildinfo
+
+frontend/test-results/
+frontend/playwright-report/

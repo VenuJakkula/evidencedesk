@@ -1,0 +1,16 @@
+﻿services:
+  retrieval:
+    image: pgvector/pgvector:0.8.7-pg18
+    ports: ['127.0.0.1:5433:5432']
+    environment:
+      POSTGRES_USER: evidencedesk
+      POSTGRES_PASSWORD: ${EVIDENCEDESK_RETRIEVAL_PASSWORD:?Set a retrieval database password}
+      POSTGRES_DB: evidencedesk_retrieval
+    volumes: ['retrieval-data:/var/lib/postgresql']
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U evidencedesk -d evidencedesk_retrieval']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  retrieval-data:

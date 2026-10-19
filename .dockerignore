@@ -1,4 +1,5 @@
 *
 !pyproject.toml
+!requirements.lock
 !app/
 !app/**

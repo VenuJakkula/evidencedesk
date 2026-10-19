@@ -3,12 +3,101 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      retrieval:
+        image: pgvector/pgvector:0.8.7-pg18
+        env:
+          POSTGRES_USER: retrieval_test
+          POSTGRES_PASSWORD: synthetic_ci_only
+          POSTGRES_DB: retrieval_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U retrieval_test -d retrieval_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      EVIDENCEDESK_TEST_RETRIEVAL_DSN: postgresql://retrieval_test:synthetic_ci_only@127.0.0.1:5432/retrieval_test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install -e '.[dev]'
+      - run: pip install -c requirements.ci.lock -e '.[dev,autogen,a2a,operations,optimization]'
       - run: pytest -q
+      - name: Synthetic held-out release gate
+        run: python -m scripts.release_evaluate
+      - name: Offline DSPy comparison
+        run: python -m scripts.optimize_classifier
+      - name: Offline provider routing comparison
+        run: python -m scripts.routing_compare
+      - name: Restore and load rehearsal
+        run: python -m scripts.operations_check
+      - name: Runtime dependency vulnerability gate
+        run: pip-audit --no-deps --disable-pip -r requirements.lock
+      - name: Learning dependency audit (findings remain visible)
+        run: python -m scripts.audit_learning
+      - run: python -m scripts.retrieval_evaluate --postgres
+      - name: Offline AutoGen framework comparison
+        run: python -m scripts.autogen_compare
+        timeout-minutes: 3
+      - name: Two-service A2A interoperability
+        run: python -m scripts.a2a_demo
+        timeout-minutes: 3
+      - run: python -m scripts.workflow_evaluate
       - run: python -m scripts.evaluate
+      - run: python -m scripts.demo
+      - run: python -m scripts.workbook_demo
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: npm run build
+        working-directory: frontend
+      - run: npm test
+        working-directory: frontend
+      - name: Install browser and system dependencies
+        run: npx playwright install --with-deps chromium
+        working-directory: frontend
+        timeout-minutes: 5
+      - name: Synthetic browser acceptance (UI journey, accessibility and regressions)
+        run: python -m scripts.workbook_browser
+        timeout-minutes: 5
+        env:
+          EVIDENCEDESK_BROWSER_CHANNEL: chromium
+      - name: Signed OIDC lifecycle and access browser gate
+        run: python -m scripts.workbook_browser --oidc
+        timeout-minutes: 5
+        env:
+          EVIDENCEDESK_BROWSER_CHANNEL: chromium
+      - name: Signed bounded workflow browser gate (local deterministic providers)
+        run: python -m scripts.workbook_browser --oidc --workflow
+        timeout-minutes: 5
+        env:
+          EVIDENCEDESK_BROWSER_CHANNEL: chromium
+      - run: python -m scripts.frontend_smoke
       - run: docker build -t evidencedesk:ci .
+      - name: Non-root container smoke and restart
+        run: python -m scripts.container_smoke
+        timeout-minutes: 3
+      - name: Image vulnerability gate
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          image-ref: evidencedesk:ci
+          format: table
+          exit-code: '1'
+          severity: CRITICAL,HIGH
+          ignore-unfixed: false
+      - name: Evaluation and operations reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-and-operations
+          path: |
+            evals/release_results.json
+            evals/optimization_results.json
+            evals/routing_results.json
+            evals/operations_results.json
+            evals/learning_audit.json

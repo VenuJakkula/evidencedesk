@@ -1,0 +1,15 @@
+{
+  "version": "synthetic-release-thresholds-v1",
+  "minimum": {
+    "recall_at_5": 1,
+    "ndcg_at_5": 1,
+    "abstention_recall": 1,
+    "answerable_coverage": 1,
+    "contradiction_detection": 1
+  },
+  "maximum": {
+    "unsupported_claims": 0,
+    "unauthorized_evidence": 0,
+    "automatic_approvals": 0
+  }
+}

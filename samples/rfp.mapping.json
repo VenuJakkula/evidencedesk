@@ -1,0 +1,17 @@
+{
+  "sheets": [
+    {
+      "sheet": "RFP",
+      "header_row": 3,
+      "question_column": "B",
+      "answer_column": "C",
+      "identifier_column": "A"
+    },
+    {
+      "sheet": "Operations",
+      "header_row": 1,
+      "question_column": "A",
+      "answer_column": "B"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "version": "dspy-offline-classification-v1",
+  "dspy": "3.4.1",
+  "optimizer": "LabeledFewShot(k=4)",
+  "training_cases": 20,
+  "compiled_demos": 4,
+  "splits": {
+    "validation": {
+      "fixed": {
+        "correct": 10,
+        "cases": 10,
+        "fixture_model_calls": 10,
+        "latency_ms": 13.297,
+        "paid_cost_usd": 0
+      },
+      "fewshot": {
+        "correct": 10,
+        "cases": 10,
+        "fixture_model_calls": 10,
+        "latency_ms": 9.711,
+        "paid_cost_usd": 0
+      }
+    },
+    "heldout": {
+      "fixed": {
+        "correct": 20,
+        "cases": 20,
+        "fixture_model_calls": 20,
+        "latency_ms": 11.653,
+        "paid_cost_usd": 0
+      },
+      "fewshot": {
+        "correct": 20,
+        "cases": 20,
+        "fixture_model_calls": 20,
+        "latency_ms": 20.445,
+        "paid_cost_usd": 0
+      }
+    }
+  },
+  "decision": "retain fixed baseline; no measured learned-model benefit",
+  "limitations": "Actual DSPy optimizer and Predict execution with rule-derived DummyLM outputs. Demos do not alter this fake model. Tests compilation and split discipline only, not prompt optimization quality. Synthetic near-duplicate splits, no human calibration, no paid calls."
+}

@@ -4,6 +4,8 @@
 
 FastAPI -> deterministic evidence/review service -> SQLite. Documents are plain text with tenant, version and expiry. Drafting extracts matching sentences; it does not use embeddings or generation. SQLite persists review state across restarts. Single API key and server-configured tenant are local-only identity controls.
 
+Milestone 1 adds bounded multipart/ZIP/XML preflight -> openpyxl inspection/mapping -> immutable SQLite workbook assets -> questionnaire items with source-cell provenance -> immutable revisions linked to baseline answers -> revision-specific approvals -> separate XLSX/report/manifest export. Writer transactions serialize revision edits, approvals, idempotent imports and export snapshots. Additive migration 001 preserves the legacy schema and data; see WORKBOOKS.md for upgrade and supported-format limits.
+
 ## Target
 
 FastAPI/OIDC -> questionnaire parser -> durable LangGraph workflow -> permission-filtered hybrid retrieval -> model gateway -> claim verifier -> review queue -> workbook exporter. PostgreSQL/pgvector stores evidence, workflow and audit records; object storage holds original files; Langfuse receives redacted traces.

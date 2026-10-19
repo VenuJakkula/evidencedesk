@@ -1,0 +1,24 @@
+{
+  "version": "local-operations-v1",
+  "restore_integrity": true,
+  "restored_documents": 1,
+  "candidate_change_rolled_back": true,
+  "migration_reapply": "passed",
+  "restore_ms": 46.045,
+  "recovery_objectives": {
+    "target_rpo_minutes": 60,
+    "target_rto_minutes": 30,
+    "status": "proposed operator objectives, not established production guarantees"
+  },
+  "load": {
+    "transport": "in-process ASGI",
+    "requests": 80,
+    "concurrency": 4,
+    "failures": 0,
+    "p50_ms": 9.1,
+    "p95_ms": 14.261
+  },
+  "staging_rollback": "not executed",
+  "container_smoke": "not executed",
+  "limitations": "Tiny synthetic SQLite restore and health-route load only; no full-service RTO, production backup freshness, network load or image rollback claim."
+}

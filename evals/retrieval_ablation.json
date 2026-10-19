@@ -1,0 +1,66 @@
+{
+  "validated_date": "2026-10-13",
+  "postgres_version": "18.0",
+  "pgvector_version": "0.8.7",
+  "limitations": "Four hand-authored fixture cases, synthetic embeddings; not a neural-model quality benchmark.",
+  "reports": [
+    {
+      "backend": "memory-fixture",
+      "cases": 4,
+      "chunking": "lines-exact-1000-v1",
+      "embedding_model": "fixture-hash64-synonyms-v1",
+      "metrics": {
+        "embedding": {
+          "denominator": 4,
+          "ndcg_at_3": 1.0,
+          "recall_at_3": 1.0
+        },
+        "hybrid": {
+          "denominator": 4,
+          "ndcg_at_3": 1.0,
+          "recall_at_3": 1.0
+        },
+        "hybrid_rerank": {
+          "denominator": 4,
+          "ndcg_at_3": 1.0,
+          "recall_at_3": 1.0
+        },
+        "lexical": {
+          "denominator": 4,
+          "ndcg_at_3": 0.75,
+          "recall_at_3": 0.75
+        }
+      },
+      "version": "synthetic-retrieval-ablation-v1"
+    },
+    {
+      "backend": "postgres-pgvector",
+      "cases": 4,
+      "chunking": "lines-exact-1000-v1",
+      "embedding_model": "fixture-hash64-synonyms-v1",
+      "metrics": {
+        "embedding": {
+          "denominator": 4,
+          "ndcg_at_3": 1.0,
+          "recall_at_3": 1.0
+        },
+        "hybrid": {
+          "denominator": 4,
+          "ndcg_at_3": 1.0,
+          "recall_at_3": 1.0
+        },
+        "hybrid_rerank": {
+          "denominator": 4,
+          "ndcg_at_3": 1.0,
+          "recall_at_3": 1.0
+        },
+        "lexical": {
+          "denominator": 4,
+          "ndcg_at_3": 0.75,
+          "recall_at_3": 0.75
+        }
+      },
+      "version": "synthetic-retrieval-ablation-v1"
+    }
+  ]
+}

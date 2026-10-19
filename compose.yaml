@@ -6,5 +6,13 @@ services:
       EVIDENCEDESK_API_KEY: ${EVIDENCEDESK_API_KEY:?Set EVIDENCEDESK_API_KEY}
       EVIDENCEDESK_TENANT: demo
     volumes: ["evidence-data:/data"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=64m"]
+    mem_limit: 512m
+    cpus: 1
+    pids_limit: 128
+    restart: unless-stopped
 volumes:
   evidence-data:

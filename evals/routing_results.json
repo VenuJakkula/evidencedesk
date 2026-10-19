@@ -1,0 +1,63 @@
+{
+  "version": "offline-routing-comparison-v1",
+  "split": "development",
+  "metrics": {
+    "baseline": {
+      "cases": 20,
+      "correct": 20,
+      "citation_integrity": 20,
+      "unsupported_claims": 0,
+      "unauthorized_evidence": 0,
+      "automatic_approvals": 0,
+      "recall_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "gold_cases": 6,
+      "abstention_recall": 1.0,
+      "unanswerable_cases": 16,
+      "answerable_coverage": 1.0,
+      "answerable_cases": 4,
+      "contradiction_detection": 1.0,
+      "contradiction_cases": 2,
+      "p50_ms": 7.742,
+      "p95_ms": 39.797,
+      "model_calls": 4,
+      "cost_usd": 0,
+      "review_edit_rate": null,
+      "review_time_seconds": null
+    },
+    "single_quote": {
+      "cases": 20,
+      "correct": 20,
+      "citation_integrity": 20,
+      "unsupported_claims": 0,
+      "unauthorized_evidence": 0,
+      "automatic_approvals": 0,
+      "recall_at_5": 1.0,
+      "ndcg_at_5": 1.0,
+      "gold_cases": 6,
+      "abstention_recall": 1.0,
+      "unanswerable_cases": 16,
+      "answerable_coverage": 1.0,
+      "answerable_cases": 4,
+      "contradiction_detection": 1.0,
+      "contradiction_cases": 2,
+      "p50_ms": 8.564,
+      "p95_ms": 14.528,
+      "model_calls": 4,
+      "cost_usd": 0,
+      "review_edit_rate": null,
+      "review_time_seconds": null
+    }
+  },
+  "provisional_preferred": "single_quote",
+  "selection_order": [
+    "correctness",
+    "unsupported claims",
+    "unauthorized evidence",
+    "cost",
+    "p95 latency"
+  ],
+  "primary_workflow_adoption": false,
+  "decision": "retain primary fixed adapter; offline routing is a separate experiment",
+  "limitations": "Two deterministic extractive adapters, not independent paid model providers. Timings cover fixture services and are not provider SLAs. No real privacy/residency or live cost validation. Existing workflow budgets do not accept this experimental router."
+}
