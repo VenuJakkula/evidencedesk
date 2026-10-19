@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -c requirements.ci.lock -e '.[dev,autogen,a2a,operations,optimization]'
-      - run: pytest -q
+      - run: python -m pytest -q
       - name: Synthetic held-out release gate
         run: python -m scripts.release_evaluate
       - name: Offline DSPy comparison
