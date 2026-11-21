@@ -33,7 +33,7 @@ dspy==3.4.1
 et-xmlfile==2.0.0
 fastapi==0.142.2
 fastuuid==0.14.0
-filelock==3.32.7
+filelock==4.2.12
 frozenlist==1.8.0
 fsspec==2026.9.0
 gepa==0.1.4
@@ -100,7 +100,7 @@ protobuf==5.29.6
 psycopg==3.3.6
 psycopg-binary==3.3.6
 py-serializable==2.1.0
-pyasn1==0.6.4
+pyasn1==0.6.5
 pyasn1-modules==0.4.2
 pycparser==3.11
 pydantic==2.13.5
