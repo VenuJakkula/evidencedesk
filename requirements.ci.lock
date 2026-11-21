@@ -14,11 +14,11 @@ autogen-agentchat==0.7.5
 autogen-core==0.7.5
 autogen-ext==0.7.5
 boolean-py==5.0
-boto3==1.43.114
-botocore==1.43.114
+boto3==1.44.9
+botocore==1.44.9
 cachecontrol==0.14.4
 cachetools==7.2.3
-certifi==2026.10.18
+certifi==2026.11.20
 cffi==2.1.1
 charset-normalizer==3.5.2
 click==8.5.0
@@ -72,7 +72,7 @@ langgraph-prebuilt==1.1.0
 langgraph-sdk==0.4.7
 langsmith==0.14.8
 license-expression==30.4.4
-litellm==1.106.0
+litellm==1.106.12
 markdown-it-py==4.2.0
 markupsafe==3.0.4
 mcp==2.3.0
