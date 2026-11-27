@@ -14,11 +14,11 @@ autogen-agentchat==0.7.5
 autogen-core==0.7.5
 autogen-ext==0.7.5
 boolean-py==5.0
-boto3==1.43.114
-botocore==1.43.114
+boto3==1.44.9
+botocore==1.44.9
 cachecontrol==0.14.4
 cachetools==7.2.3
-certifi==2026.7.22
+certifi==2026.11.20
 cffi==2.1.1
 charset-normalizer==3.5.2
 click==8.5.0
@@ -33,7 +33,7 @@ dspy==3.4.1
 et-xmlfile==2.0.0
 fastapi==0.142.2
 fastuuid==0.14.0
-filelock==3.32.7
+filelock==4.2.12
 frozenlist==1.8.0
 fsspec==2026.9.0
 gepa==0.1.4
@@ -72,7 +72,7 @@ langgraph-prebuilt==1.1.0
 langgraph-sdk==0.4.7
 langsmith==0.14.8
 license-expression==30.4.4
-litellm==1.106.0
+litellm==1.106.12
 markdown-it-py==4.2.0
 markupsafe==3.0.4
 mcp==2.3.0
@@ -82,7 +82,7 @@ msgpack==1.2.3
 multidict==7.1.0
 openai==2.54.0
 openpyxl==3.1.5
-opentelemetry-api==1.45.1
+opentelemetry-api==1.45.2
 orjson==3.13.0
 ormsgpack==1.12.2
 packageurl-python==0.17.6
@@ -100,7 +100,7 @@ protobuf==5.29.6
 psycopg==3.3.6
 psycopg-binary==3.3.6
 py-serializable==2.1.0
-pyasn1==0.6.4
+pyasn1==0.6.5
 pyasn1-modules==0.4.2
 pycparser==3.11
 pydantic==2.13.5

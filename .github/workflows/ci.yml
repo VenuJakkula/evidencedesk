@@ -78,7 +78,7 @@ jobs:
         env:
           EVIDENCEDESK_BROWSER_CHANNEL: chromium
       - run: python -m scripts.frontend_smoke
-      - run: docker build -t evidencedesk:ci .
+      - run: docker build --pull -t evidencedesk:ci .
       - name: Non-root container smoke and restart
         run: python -m scripts.container_smoke
         timeout-minutes: 3
